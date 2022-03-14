@@ -13,6 +13,8 @@ export const TradeTeamBox = styled.div`
   border-width: 1px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-style: solid;
+  border-color: #D9DAE8;
   /* border-style: solid;
   border-color: transparent;
   border-color: #D9DAE8; */
@@ -25,7 +27,7 @@ export const TradeTeamBox = styled.div`
 `
 
 export const TradeButtonWrapper = styled.div`
-  width: 125px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   padding: 40px 2vw;
@@ -35,6 +37,7 @@ export const IconWrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 
 export const TradeButton = styled.button`
