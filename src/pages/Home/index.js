@@ -1,10 +1,11 @@
-import Header from '../../components/Header';
+import Container from '../../components/PageContainer';
+import TradeBox from '../../components/TradeBox';
 
 function Home() {
   return (
-    <>
-      <Header />
-    </>
+    <Container>
+      <TradeBox />
+    </Container>
   );
 }
 
