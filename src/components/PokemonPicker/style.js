@@ -14,8 +14,8 @@ export const PickerContainer = styled.div`
 `
 
 export const PokemonList = styled.div`
-  font-weight: 600;
-  font-size: 1.125rem;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 export const SearchBarContainer = styled.div`
