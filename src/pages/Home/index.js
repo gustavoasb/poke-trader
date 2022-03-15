@@ -37,11 +37,33 @@ function Home() {
     return experience;
   }
 
+  function saveTrade(){
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let trade = {
+      date: date,
+      pokemonsBlue,
+      pokemonsRed,
+      blueExp: blueExp.current,
+      redExp: redExp.current,
+      fairness: fairness.current,
+    };
+    let storedTrades = JSON.parse(localStorage.getItem("trades"));
+    if(storedTrades){
+      storedTrades.push(trade)
+    } else{
+      storedTrades = []
+      storedTrades.push(trade)
+    }
+    localStorage.setItem("trades", JSON.stringify(storedTrades));
+  }
+
   const checkTrade = async () => {
     redExp.current = await pokemonListExperience(pokemonsRed);
     blueExp.current = await pokemonListExperience(pokemonsBlue)
     fairness.current = await Math.abs(blueExp.current - redExp.current);
     setMadeTrade(key => key + 1);
+    saveTrade();
   }
   
   return (
