@@ -11,16 +11,21 @@ function Home() {
   const [pokemonsRed, setPokemonsRed] = useState([]);
   const [pokemonsBlue, setPokemonsBlue] = useState([]);
   const [madeTrade, setMadeTrade] = useState(0);
+  const [apiUrl, setApiUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=18");
   let fairness = useRef(0);
   let redExp = useRef(0);
   let blueExp = useRef(0);
+  let nextPage = useRef(null)
+  let previousPage = useRef(null)
 
   useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon/")
+    axios.get(apiUrl)
       .then((res) => {
         setPokemons(res.data.results)
+        nextPage.current = res.data.next
+        previousPage.current = res.data.previous
       })
-  }, [])
+  }, [apiUrl])
 
   const getPokemon = (pokemon, isBlue) => {
     if(isBlue){
@@ -28,6 +33,14 @@ function Home() {
     } else{
       setPokemonsRed([...pokemonsRed, pokemon]);
     } 
+  }
+
+  const goToNext = () => {
+    setApiUrl(nextPage.current) 
+  }
+
+  const goToPrevious = () => {
+    setApiUrl(previousPage.current) 
   }
 
   function pokemonListExperience(array){
@@ -68,8 +81,9 @@ function Home() {
   
   return (
     <Container>
-      <TradeBox pokemonsBlue={pokemonsBlue} pokemonsRed={pokemonsRed} checkTrade={checkTrade}/>
-      <PokemonPicker pokemons={pokemons} getPokemon={getPokemon}/>
+      <TradeBox 
+        pokemonsBlue={pokemonsBlue} pokemonsRed={pokemonsRed} checkTrade={checkTrade} />
+      <PokemonPicker pokemons={pokemons} getPokemon={getPokemon} previousPage={previousPage.current} nextPage={nextPage.current} goToNext={goToNext} goToPrevious={goToPrevious}/>
       {madeTrade > 0 && <TradeInfo redExp={redExp.current} blueExp={blueExp.current} fairness={fairness.current}/>}
     </Container>
   );
