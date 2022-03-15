@@ -1,17 +1,18 @@
-import { TradeBoxWrapper, TradeTeamBox, TradeButtonWrapper, TradeButton, IconWrapper } from './style'
+import { TradeBoxWrapper, TradeButtonWrapper, TradeButton, IconWrapper } from './style'
 import { FiRepeat } from 'react-icons/fi';
+import TradeTeamBox from './TradeTeamBox';
 
-function TradeBox() {
+function TradeBox({pokemonsBlue, pokemonsRed}) {
   return (
     <TradeBoxWrapper>
-      <TradeTeamBox color={"#E3EEFF"} />
+      <TradeTeamBox color={"#E3EEFF"} pokemons={pokemonsBlue} />
       <TradeButtonWrapper>
         <IconWrapper>
           <FiRepeat size={50} color={"#272955"}/>
         </IconWrapper>
         <TradeButton>Check Trade</TradeButton>
       </TradeButtonWrapper>
-      <TradeTeamBox color={"#FFE3E3"} />
+      <TradeTeamBox color={"#FFE3E3"} pokemons={pokemonsRed} />
     </TradeBoxWrapper>
   );
 }
