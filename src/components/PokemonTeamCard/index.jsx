@@ -1,17 +1,14 @@
 import { CardContainer, IconContainer, PokemonName, PokemonImage, IconWrapper } from "./style";
-import { FiPlusCircle } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 
-function PokemonTeamCard({pokemon}){
+function PokemonTeamCard({idx, pokemon, removePokemon, isBlue}){
   return(
     <CardContainer>
       <PokemonImage src={pokemon?.sprites?.front_default}></PokemonImage>
       <PokemonName>{pokemon?.name}</PokemonName>
       <IconContainer>
-        <IconWrapper>
-          <FiPlusCircle size={24} color={"#A0C6FF"}/>
-        </IconWrapper>
-        <IconWrapper>
-          <FiPlusCircle size={24} color={"#FFBDBD"}/>
+        <IconWrapper onClick={() => removePokemon(idx, isBlue)}>
+          <FiX size={24} color={"#272955"}/>
         </IconWrapper>
       </IconContainer>
     </CardContainer>
