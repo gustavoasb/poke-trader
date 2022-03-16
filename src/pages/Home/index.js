@@ -12,6 +12,7 @@ function Home() {
   const [pokemonsBlue, setPokemonsBlue] = useState([]);
   const [madeTrade, setMadeTrade] = useState(0);
   const [apiUrl, setApiUrl] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=18");
+  const [updateKey, setUpdateKey] = useState(0);
   let fairness = useRef(0);
   let redExp = useRef(0);
   let blueExp = useRef(0);
@@ -29,9 +30,13 @@ function Home() {
 
   const getPokemon = (pokemon, isBlue) => {
     if(isBlue){
-      setPokemonsBlue([...pokemonsBlue, pokemon])
+      if(pokemonsBlue.length < 6){
+        setPokemonsBlue([...pokemonsBlue, pokemon])
+      }
     } else{
-      setPokemonsRed([...pokemonsRed, pokemon]);
+      if(pokemonsRed.length < 6){
+        setPokemonsRed([...pokemonsRed, pokemon]);
+      }
     } 
   }
 
@@ -68,21 +73,47 @@ function Home() {
       storedTrades = []
       storedTrades.push(trade)
     }
-    localStorage.setItem("trades", JSON.stringify(storedTrades));
+    try{
+      localStorage.setItem("trades", JSON.stringify(storedTrades));
+    }
+    catch(e){
+      storedTrades = []
+      storedTrades.push(trade)
+    }
   }
 
   const checkTrade = async () => {
     redExp.current = await pokemonListExperience(pokemonsRed);
     blueExp.current = await pokemonListExperience(pokemonsBlue)
     fairness.current = await Math.abs(blueExp.current - redExp.current);
-    setMadeTrade(key => key + 1);
+    await setMadeTrade(key => key + 1);
     saveTrade();
+    let tradeInfo = document.getElementById("trade-info");
+    console.log(tradeInfo)
+    tradeInfo.scrollIntoView({
+      behavior: "smooth",
+    });
   }
+
+  function removeElementFromState(array, idx){
+    array.splice(idx, 1)
+    return array
+  }
+
+  const removePokemon = (idx, isBlue) => {
+    if(isBlue){
+      setPokemonsBlue(removeElementFromState(pokemonsBlue, idx));
+    } else{
+      setPokemonsRed(removeElementFromState(pokemonsRed, idx));
+    }
+    setUpdateKey(key => key+1);
+  }
+
   
   return (
     <Container>
       <TradeBox 
-        pokemonsBlue={pokemonsBlue} pokemonsRed={pokemonsRed} checkTrade={checkTrade} />
+        pokemonsBlue={pokemonsBlue} pokemonsRed={pokemonsRed} checkTrade={checkTrade} removePokemon={removePokemon}/>
       <PokemonPicker pokemons={pokemons} getPokemon={getPokemon} previousPage={previousPage.current} nextPage={nextPage.current} goToNext={goToNext} goToPrevious={goToPrevious}/>
       {madeTrade > 0 && <TradeInfo redExp={redExp.current} blueExp={blueExp.current} fairness={fairness.current}/>}
     </Container>

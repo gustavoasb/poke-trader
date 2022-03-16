@@ -8,7 +8,7 @@ function TradeInfo({redExp, blueExp, fairness}){
   ]
 
   return(
-    <>
+    <div id="trade-info">
     <h1>Trade Info oi</h1>
     {fairness <= 40 ? "Fair Trade" : "Unfair Trade"}
     <ResponsiveContainer width="100%" aspect={5}>
@@ -28,7 +28,7 @@ function TradeInfo({redExp, blueExp, fairness}){
       </PieChart>
     </ResponsiveContainer>
     <span>The trade is calculated by the base experience of each pokémon.</span>
-    </>
+    </div>
   )
 }
 
