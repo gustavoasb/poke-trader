@@ -22,6 +22,7 @@ export const IconWrapper = styled.div`
 export const TradeButton = styled.button`
   width: 100%;
   background-color: #272955;
-  color: "#FFFFFF";
-  border-radius: 5;
+  color: white;
+  border-radius: 5px;
+  height: 1.5rem;
 `

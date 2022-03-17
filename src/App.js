@@ -18,7 +18,6 @@ function App() {
   }
 
   const storedTrades = JSON.parse(localStorage.getItem("trades"));
-  console.log(storedTrades);
 
   return (
     <>
@@ -29,13 +28,13 @@ function App() {
         onRequestClose={closeModal}
         contentLabel="Example Modal"
       >
-        <button onClick={closeModal}>close</button>
+        <button style={{backgroundColor: "#272955", borderRadius: "5px", color: "white"}} onClick={closeModal}>close</button>
         <h2>My trades</h2>
         {storedTrades?.map((trade) => (
           <>
             <div>{trade?.date}</div>
-            <div>Blue Side Pokemons: {trade?.pokemonsBlue?.map((pokemon) => (<span>{pokemon.name}</span>))}</div>
-            <div>Red Side Pokemons: {trade?.pokemonsRed?.map((pokemon) => (<span>{pokemon.name}</span>))}</div>
+            <div>Blue Side Pokemons: {trade?.pokemonsBlue?.map((pokemon) => (<span style={{textTransform: "capitalize"}}>{pokemon.name+" "}</span>))}</div>
+            <div>Red Side Pokemons: {trade?.pokemonsRed?.map((pokemon) => (<span style={{textTransform: "capitalize"}}>{pokemon.name+" "}</span>))}</div>
             <div>Fairness: {trade?.fairness}</div>
             <br></br>
           </>

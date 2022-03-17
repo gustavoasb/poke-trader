@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
-export const TradeTeamBoxContainer = styled.div`
+export const Title = styled.h2`
+  font-size: 1.25rem;
+  color: "#272955";
+`
+
+export const FairnessText = styled.div`
   
 `
