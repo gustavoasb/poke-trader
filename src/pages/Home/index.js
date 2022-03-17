@@ -32,11 +32,11 @@ function Home() {
     if(isBlue){
       if(pokemonsBlue.length < 6){
         setPokemonsBlue([...pokemonsBlue, pokemon])
-      }
+      } else alert("Pokemon max limit exceeded");
     } else{
       if(pokemonsRed.length < 6){
         setPokemonsRed([...pokemonsRed, pokemon]);
-      }
+      } else alert("Pokemon max limit exceeded");
     } 
   }
 
@@ -83,13 +83,16 @@ function Home() {
   }
 
   const checkTrade = async () => {
+    if(pokemonsRed.length < 1 || pokemonsBlue.length < 1){
+      alert("Please, add at least 1 pokémon on each side of the trade");
+      return
+    }
     redExp.current = await pokemonListExperience(pokemonsRed);
     blueExp.current = await pokemonListExperience(pokemonsBlue)
     fairness.current = await Math.abs(blueExp.current - redExp.current);
     await setMadeTrade(key => key + 1);
     saveTrade();
     let tradeInfo = document.getElementById("trade-info");
-    console.log(tradeInfo)
     tradeInfo.scrollIntoView({
       behavior: "smooth",
     });
