@@ -31,7 +31,7 @@ function TradeInfo({redExp, blueExp, fairness}){
     <br></br>
     <div style={{fontWeight: "500"}}>How is it calculated?</div>
     <br></br>
-    <span>Each pokemon has a base experience. Calculating the total base experience of the teams, we can have a idea of the strength. By defining 
+    <span>Each pokemon has a base experience. Calculating the total base experience of the teams, we can have an idea of the strength. By defining 
 a threshold, it's possible to judge the disparity between the two sides. Right now, the value of the threshold is 40.</span>
     </div>
   )
